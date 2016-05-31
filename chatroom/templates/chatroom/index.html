@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load staticfiles %}
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="http://js.pusher.com/3.0/pusher.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="{% static 'chatroom/css/styles.css' %}"/>
+
+
+    <title>Pusher Chat Room</title>
+
+</head>
+<body>
+<script type="text/javascript">
+    var CONFIG = {
+        PUSHER: {
+            PUSHER_KEY: '{{ PUSHER_KEY }}',
+            PUSHER_CHANNEL_NAME: '{{ PUSHER_CHANNEL_NAME }}'
+        }
+    };
+
+    var USER = {
+        NAME: '{{ USERNAME }}'
+    };
+
+</script>
+<div data-role="page">
+
+    <div data-role="header">
+        <h1>My Title</h1>
+        <span class="connection-status"></span>
+    </div><!-- /header -->
+
+    <div data-role="content">
+
+        <div class="col1">
+            <h2>Messages</h2>
+            <ul id="messages" data-role="listview" class="ui-listview"></ul>
+
+            <label for="textarea" class="ui-hidden-accessible">Message:</label>
+            <textarea name="user_message" id="user_message" placeholder="Message"></textarea>
+            <div id="activity"></div>
+
+            <a id="send_btn" href="{% url 'chatroom:message' %}" data-role="button" data-theme="b">Send</a>
+        </div>
+
+        <div class="col2">
+            <h3>Online</h3>
+
+            <ul id="users">
+            </ul>
+
+        </div>
+
+    </div><!-- /content -->
+
+</div><!-- /page -->
+<script src="{% static 'chatroom/js/app.js' %}"></script>
+
+</body>
+</html>
